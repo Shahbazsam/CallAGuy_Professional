@@ -1,6 +1,7 @@
 package com.example.callaguy_professional.professional.presentation.service_list.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -29,6 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.callaguy_professional.R
+import com.example.callaguy_professional.core.presentation.components.SmartImageLoader
 import com.example.callaguy_professional.professional.domain.ServiceRequests
 import com.example.callaguy_professional.ui.theme.TextPrimary
 import com.example.callaguy_professional.ui.theme.TextSecondary
@@ -36,30 +38,31 @@ import com.example.callaguy_professional.ui.theme.TextSecondary
 
 @Composable
 fun ServiceCard(
-    onClick : () -> Unit ,
-    service : ServiceRequests?
+    modifier: Modifier = Modifier,
+    onClick : (ServiceRequests) -> Unit,
+    service : ServiceRequests
 ) {
     Card(
-        modifier = Modifier
+        modifier = modifier
+            .clickable{
+                onClick(service)
+            }
             .fillMaxWidth()
             .height(72.dp),
         colors = CardDefaults.cardColors(
             containerColor = Color.Transparent
         ),
-
     ) {
         Row(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 12.dp),
+                .padding(horizontal = 18.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Image(
+            SmartImageLoader(
                 modifier = Modifier
                     .size(56.dp),
-                painter = painterResource(R.drawable.image),
-                contentDescription = null,
-                contentScale = ContentScale.Crop
+                imageUrl = service.image
             )
             Spacer(Modifier.width(12.dp))
             Column (
@@ -69,7 +72,7 @@ fun ServiceCard(
                 verticalArrangement = Arrangement.Center
             ){
                 Text(
-                    text = "Fresh Coat of Paint for One",
+                    text = service.subService ,
                     color = TextPrimary,
                     style = MaterialTheme.typography.bodyMedium,
                     maxLines = 1,
@@ -78,7 +81,7 @@ fun ServiceCard(
                     fontWeight = FontWeight.Medium
                 )
                 Text(
-                    text = "Fresh Coat of Paint for One",
+                    text = service.specialInstructions ?: "No Instruction Given",
                     color = TextSecondary,
                     style = MaterialTheme.typography.bodySmall,
                     maxLines = 1,
@@ -88,7 +91,7 @@ fun ServiceCard(
                 )
             }
             Text(
-                text = "$150",
+                text = service.amount.toString(),
                 color = TextPrimary,
                 style = MaterialTheme.typography.bodySmall,
                 fontSize = 16.sp,
@@ -96,13 +99,4 @@ fun ServiceCard(
             )
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun Preview() {
-    ServiceCard(
-        onClick = {},
-        service = null
-    )
 }

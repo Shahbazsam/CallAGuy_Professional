@@ -1,3 +1,37 @@
 <resources>
     <string name="app_name">CallAGuy_Professional</string>
+    <string name="accept_job">Accept Job</string>
+    <string name="scheduled">scheduled</string>
+    <string name="time">Time</string>
+    <string name="address">Address</string>
+    <string name="amount">Amount</string>
+    <string name="job_accepted">Job Accepted Successfully ....!</string>
+    <string name="go_to_orders">Go to Orders</string>
+    <string name="booking_confirmed">Your booking has been successfully confirmed.\n</string>
+    <string name="email_description">You will receive a confirmation email shortly.</string>
+    <string name="no_orders_yet">No Orders Yet</string>
+    <string name="you_don_t_have_any_upcoming_or_past_orders">You don’t have any upcoming or past orders.</string>
+    <string name="no_orders">No Orders</string>
+    <string name="accepted">Accepted</string>
+    <string name="completed">Completed</string>
+    <string name="complete_job">Complete Job</string>
+    <string name="status_updated_successfully">Status Updated Successfully</string>
+    <string name="the_job_has_been_completed_successfully">The Job has been completed Successfully</string>
+
+    <string name="error_disk_full">Oops, it seems like your disk is full.</string>
+    <string name="error_unknown">Oops, something went wrong.</string>
+    <string name="error_request_timeout">The request timed out.</string>
+    <string name="error_no_internet">Couldn’t reach server, please check your internet connection.</string>
+    <string name="error_too_many_requests">Your quota seems to be exceeded.</string>
+    <string name="error_serialization">Couldn’t parse data.</string>
+    <string name="app_logo">App Logo</string>
+    <string name="you_re_not_approved_yet">You\'re Not Approved Yet</string>
+    <string name="once_approved_you_will_receive">"Once Approved, You will receive "</string>
+    <string name="an_confirmation_email">an confirmation email</string>
+    <string name="approved">APPROVED</string>
+    <string name="professional_name">Professional Name :</string>
+    <string name="e_mail">E-Mail :</string>
+    <string name="experience_year_s">Experience Year\'s :</string>
+    <string name="log_out">Log Out</string>
+    <string name="services_offered">Services Offered :</string>
 </resources>

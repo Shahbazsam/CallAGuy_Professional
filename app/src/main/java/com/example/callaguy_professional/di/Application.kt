@@ -1,11 +1,9 @@
-package com.example.callaguy_professional
+package com.example.callaguy_professional.di
 
-import android.app.Application
-import com.example.callaguy_professional.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
-class Application : Application() {
+class Application : android.app.Application() {
     override fun onCreate() {
         super.onCreate()
         startKoin {

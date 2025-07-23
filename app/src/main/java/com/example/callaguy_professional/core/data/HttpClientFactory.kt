@@ -34,7 +34,6 @@ object HttpClientFactory {
                 contextual(LocalTime::class , LocalTimeSerializer)
                 contextual(LocalDateTime::class , LocalDateTimeSerializer)
                 contextual(BigDecimal::class , BigDecimalSerializer)
-
             }
         }
 

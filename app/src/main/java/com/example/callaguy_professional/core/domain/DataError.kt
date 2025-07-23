@@ -1,6 +1,6 @@
 package com.example.callaguy_professional.core.domain
 
-interface DataError : Error {
+sealed interface DataError : Error {
     enum class Remote : DataError {
         REQUEST_TIMEOUT,
         TOO_MANY_REQUESTS,
