@@ -1,5 +1,7 @@
 package com.example.callaguy_professional.professional.presentation.profile.components
 
+import android.net.Uri
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
@@ -41,6 +43,8 @@ import com.example.callaguy_professional.ui.theme.ToggleButtonContent
 @Composable
 fun ProfileCardItem(
     modifier: Modifier = Modifier,
+    launcher: ActivityResultLauncher<PickVisualMediaRequest>,
+    imageUri : Uri? = null,
     isLoading : Boolean,
     info : ProfessionalProfileInfo
     ) {
@@ -60,25 +64,38 @@ fun ProfileCardItem(
                         .size(80.dp)
                 )
             }
-            if (info.profilePicture == null){
-                Image(
-                    painter = painterResource(R.drawable.logo), // Replace with real image if available
-                    contentDescription = "Profile Picture",
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .clip(CircleShape)
-                        .border(2.dp, TextSecondary, CircleShape),
-                    contentScale = ContentScale.Crop
-                )
-            }else  {
-                SmartImageLoader(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .clip(CircleShape)
-                        .border(2.dp , TextSecondary, CircleShape),
-                    imageUrl = info.profilePicture,
-                    shape = CircleShape
-                )
+            when{
+                imageUri != null -> {
+                    SmartImageLoader(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .clip(CircleShape)
+                            .border(2.dp , TextSecondary, CircleShape),
+                        imageUrl = imageUri,
+                        shape = CircleShape
+                    )
+                }
+                !info.profilePicture.isNullOrBlank() -> {
+                    SmartImageLoader(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .clip(CircleShape)
+                            .border(2.dp , TextSecondary, CircleShape),
+                        imageUrl = info.profilePicture,
+                        shape = CircleShape
+                    )
+                }
+                else -> {
+                    Image(
+                        painter = painterResource(R.drawable.logo), // Replace with real image if available
+                        contentDescription = "Profile Picture",
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .clip(CircleShape)
+                            .border(2.dp, TextSecondary, CircleShape),
+                        contentScale = ContentScale.Crop
+                    )
+                }
             }
             TextButton(
                 modifier = Modifier
@@ -86,7 +103,9 @@ fun ProfileCardItem(
                     .size(50.dp)
                     .align(Alignment.BottomEnd),
                 onClick = {
-
+                    launcher.launch(
+                        PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                    )
                 },
                 colors = ButtonDefaults.textButtonColors(
                     containerColor = TextSecondary

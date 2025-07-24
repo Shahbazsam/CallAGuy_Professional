@@ -32,7 +32,7 @@ import com.example.callaguy_professional.core.presentation.AppDefaults
 @Composable
 fun SmartImageLoader(
     modifier: Modifier = Modifier,
-    imageUrl: String?,
+    imageUrl: Any?,
     shape : Shape = RoundedCornerShape(12.dp),
     contentDescription : String? = null,
 ) {

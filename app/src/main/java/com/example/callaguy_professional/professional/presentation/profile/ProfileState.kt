@@ -5,6 +5,5 @@ import com.example.callaguy_professional.professional.domain.ProfessionalProfile
 data class ProfileState(
     val isLoading : Boolean = false,
     val info : ProfessionalProfileInfo? = null,
-    val isSuccessful : Boolean = false ,
     val errorMessage : String? = null
 )
