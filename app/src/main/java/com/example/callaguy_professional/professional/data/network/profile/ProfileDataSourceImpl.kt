@@ -32,6 +32,7 @@ class ProfileDataSourceImpl(
 
             val dummyName = "image.jpg"
 
+
             httpClient.submitFormWithBinaryData(
                 url = "${AppDefaults.PROFESSIONAL_SERVICE}/professional_profile_picture",
                 formData = formData {
