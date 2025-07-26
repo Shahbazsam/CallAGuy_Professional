@@ -129,9 +129,8 @@ fun OnGoingDetailScreen(
                     containerColor = Primary
                 ),
                 shape = RoundedCornerShape(12.dp),
-                modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .padding(vertical = 12.dp)
+
+
             ) {
                 Text(
                     text = stringResource(R.string.complete_job),

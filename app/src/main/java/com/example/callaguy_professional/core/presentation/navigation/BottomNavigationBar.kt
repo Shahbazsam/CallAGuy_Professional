@@ -16,6 +16,7 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.callaguy_professional.ui.theme.Background
 import com.example.callaguy_professional.ui.theme.Primary
+import com.example.callaguy_professional.ui.theme.TextSecondary
 
 @Composable
 fun BottomNavigationBar(
@@ -47,9 +48,9 @@ fun BottomNavigationBar(
                     NavigationBarItem(
                         colors = NavigationBarItemDefaults.colors(
                             selectedIconColor = Color.DarkGray,
-                            unselectedIconColor = Primary,
+                            unselectedIconColor = TextSecondary,
                             selectedTextColor = Color.DarkGray,
-                            unselectedTextColor = Primary,
+                            unselectedTextColor = TextSecondary,
                             indicatorColor = Color.Transparent,
                             disabledIconColor = Color.LightGray.copy(alpha = 0.5f),
                             disabledTextColor = Color.LightGray.copy(alpha = 0.5f)

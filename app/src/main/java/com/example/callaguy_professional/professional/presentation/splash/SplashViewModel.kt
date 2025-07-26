@@ -30,7 +30,7 @@ class SplashViewModel(
 
     private fun checkApproval() {
         viewModelScope.launch {
-            tokenProvider.saveToken(token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwOi8vMC4wLjAuMDo4MDgxIiwiYXVkIjoidXNlcnMiLCJ1c2VySWQiOjEsInJvbGUiOiJwcm9mZXNzaW9uYWwiLCJleHAiOjE3ODM3MDIyODV9.MbCzdDsWOAPp55qLy3Lt2ky9vuXk4AN4BHTNaBZSct0")
+            tokenProvider.saveToken(token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwOi8vMC4wLjAuMDo4MDgxIiwiYXVkIjoidXNlcnMiLCJ1c2VySWQiOjEsInJvbGUiOiJwcm9mZXNzaW9uYWwiLCJleHAiOjE3ODUwODA1MjV9.dF4pp9mjxZSXrmAOyzWlWNrntdERsXVeuQ_Ea1lqRas")
             delay(1000L)
             repository
                 .isApproved()

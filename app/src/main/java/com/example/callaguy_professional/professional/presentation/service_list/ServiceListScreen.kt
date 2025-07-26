@@ -64,7 +64,7 @@ fun ServiceListScreen(
             }
         ) { service ->
             ServiceCard(
-                modifier = Modifier.padding(vertical = 12.dp),
+                modifier = Modifier.padding(vertical = 2.dp),
                 service = service,
                 onClick = {
                     onAction(ServiceListAction.OnServiceRequestClick(service))

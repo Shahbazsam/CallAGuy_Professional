@@ -13,6 +13,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.callaguy_professional.ui.theme.Background
+import com.example.callaguy_professional.ui.theme.ToggleButtonColor
 import com.example.callaguy_professional.ui.theme.ToggleButtonContent
 
 @Composable
@@ -24,7 +25,7 @@ fun ToggleButtons(
 ) {
     Row(
         Modifier
-            .padding(16.dp)
+            .padding(start = 16.dp , end = 16.dp)
             .clip(RoundedCornerShape(24.dp))
             .background(Background)
     ) {
@@ -36,7 +37,7 @@ fun ToggleButtons(
             onClick = { onToggle(false) },
             modifier = buttonModifier,
             colors = ButtonDefaults.buttonColors(
-                containerColor = if (!acceptedOrCompleted) Background else Color.Transparent,
+                containerColor = if (!acceptedOrCompleted) ToggleButtonColor else Color.Transparent,
                 contentColor = ToggleButtonContent
             ),
             shape = RoundedCornerShape(20.dp),
@@ -49,7 +50,7 @@ fun ToggleButtons(
             onClick = { onToggle(true) },
             modifier = buttonModifier,
             colors = ButtonDefaults.buttonColors(
-                containerColor = if (acceptedOrCompleted) Background else Color.Transparent,
+                containerColor = if (acceptedOrCompleted) ToggleButtonColor else Color.Transparent,
                 contentColor = ToggleButtonContent
             ),
             shape = RoundedCornerShape(20.dp),

@@ -35,6 +35,7 @@ object HttpClientFactory {
                 contextual(LocalDateTime::class , LocalDateTimeSerializer)
                 contextual(BigDecimal::class , BigDecimalSerializer)
             }
+
         }
 
         return HttpClient(OkHttp){
@@ -54,7 +55,7 @@ object HttpClientFactory {
                 accept(ContentType.Application.Json)
 
                 url {
-                    protocol = URLProtocol.HTTPS
+                    protocol = URLProtocol.HTTP
                     host = "10.20.6.60"
                     port = 8081
                 }

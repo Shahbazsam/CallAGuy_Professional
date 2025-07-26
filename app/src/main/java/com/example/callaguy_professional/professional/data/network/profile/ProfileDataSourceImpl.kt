@@ -6,9 +6,11 @@ import com.example.callaguy_professional.core.data.safeCall
 import com.example.callaguy_professional.core.domain.DataError
 import com.example.callaguy_professional.core.domain.Result
 import com.example.callaguy_professional.core.presentation.AppDefaults
+import com.example.callaguy_professional.professional.data.dto.ProfessionalProfileInfoDto
 import io.ktor.client.HttpClient
 import io.ktor.client.request.forms.formData
 import io.ktor.client.request.forms.submitFormWithBinaryData
+import io.ktor.client.request.get
 import io.ktor.http.Headers
 import io.ktor.http.HttpHeaders
 
@@ -34,7 +36,7 @@ class ProfileDataSourceImpl(
 
 
             httpClient.submitFormWithBinaryData(
-                url = "${AppDefaults.PROFESSIONAL_SERVICE}/professional_profile_picture",
+                url = AppDefaults.PROFESSIONAL_PROFILE_PICTURE,
                 formData = formData {
                     append(
                         key = "file",
@@ -45,6 +47,14 @@ class ProfileDataSourceImpl(
                         }
                     )
                 }
+            )
+        }
+    }
+
+    override suspend fun getProfileInfo(): Result<ProfessionalProfileInfoDto, DataError.Remote> {
+        return safeCall<ProfessionalProfileInfoDto> {
+            httpClient.get(
+                urlString = "${AppDefaults.PROFESSIONAL_PROFILE_PICTURE}/profile_info"
             )
         }
     }

@@ -9,3 +9,4 @@ val Divider = Color(0xFFE5E8EB)          // Thin separators
 val Background = Color(0xFFFFFFFF)       // Page background
 val NeutralButton = Color(0xFFF0F2F5)    // Decline Button
 val ToggleButtonContent = Color(0xFF777777)
+val ToggleButtonColor = Color(0xFFE8EDF5)

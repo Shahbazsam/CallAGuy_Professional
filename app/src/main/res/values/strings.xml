@@ -34,4 +34,7 @@
     <string name="experience_year_s">Experience Year\'s :</string>
     <string name="log_out">Log Out</string>
     <string name="services_offered">Services Offered :</string>
+    <string name="profile_picture_updated_successfully">Profile Picture Updated Successfully!</string>
+    <string name="profile_update_failed_try_again">Profile Update Failed, Try Again!</string>
+    <string name="retry">Retry</string>
 </resources>

@@ -54,9 +54,5 @@ fun ServiceChip(
             }
 
         }
-
-
     }
-
-
 }

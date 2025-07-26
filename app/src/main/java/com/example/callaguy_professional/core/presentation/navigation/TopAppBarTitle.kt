@@ -1,5 +1,7 @@
 package com.example.callaguy_professional.core.presentation.navigation
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -11,6 +13,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.callaguy_professional.ui.theme.Background
 import com.example.callaguy_professional.ui.theme.TextPrimary
@@ -19,18 +23,20 @@ import com.example.callaguy_professional.ui.theme.TextPrimary
 @Composable
 fun TopAppBarTitle(navController: NavController) {
     val navBackStack by navController.currentBackStackEntryAsState()
-    val currentDestinations : NavDestination? = navBackStack?.destination
+    val currentDestination: NavDestination? = navBackStack?.destination
 
-    val headerTitle = TopLevelHeader.entries.firstOrNull {
-        it.destination == currentDestinations
-    }?.label
 
-    headerTitle?.let {
-        TopAppBar(
+    val currentHeader = TopLevelHeader.entries.firstOrNull { header ->
+        currentDestination?.hierarchy?.any {
+            it.hasRoute(header.destination::class)
+        } == true
+    }
+    currentHeader?.let { header ->
+        CenterAlignedTopAppBar(
             title = {
                 Text(
-                    text = headerTitle,
-                    fontSize = 18.sp,
+                    text = header.label,
+                    fontSize = 22.sp,
                     fontWeight = FontWeight.Bold,
                     style = MaterialTheme.typography.bodyLarge
                 )
@@ -41,5 +47,6 @@ fun TopAppBarTitle(navController: NavController) {
             )
         )
     }
+
 
 }

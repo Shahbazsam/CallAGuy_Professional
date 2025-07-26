@@ -7,5 +7,7 @@ object AppDefaults {
     @DrawableRes
     val imageErrorRes = R.drawable.image
 
+    const val PROFESSIONAL_AUTH = "/professional_auth"
     const val PROFESSIONAL_SERVICE = "/professional_service_request"
+    const val PROFESSIONAL_PROFILE_PICTURE = "/professional_profile_picture"
 }

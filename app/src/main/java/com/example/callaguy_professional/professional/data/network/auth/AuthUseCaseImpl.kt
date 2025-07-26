@@ -13,7 +13,7 @@ class AuthUseCaseImpl(
     override suspend fun isApproved(): Result<Boolean, DataError.Remote> {
         return safeCall<Boolean> {
             httpClient.get(
-                urlString = "${AppDefaults.PROFESSIONAL_SERVICE}/is_approved"
+                urlString = "${AppDefaults.PROFESSIONAL_AUTH}/is_approved"
             )
         }
     }

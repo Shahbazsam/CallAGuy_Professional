@@ -23,6 +23,7 @@ import com.example.callaguy_professional.professional.presentation.on_going.OnGo
 import com.example.callaguy_professional.professional.presentation.on_going_detail.OnGoingDetailAction
 import com.example.callaguy_professional.professional.presentation.on_going_detail.OnGoingDetailRoot
 import com.example.callaguy_professional.professional.presentation.on_going_detail.OnGoingDetailViewModel
+import com.example.callaguy_professional.professional.presentation.profile.ProfileScreenRoot
 import com.example.callaguy_professional.professional.presentation.service_list.ServiceListScreenRoot
 import com.example.callaguy_professional.professional.presentation.sharedViewModel.OnGoingSharedViewModel
 import com.example.callaguy_professional.professional.presentation.sharedViewModel.ServiceListSharedViewModel
@@ -34,11 +35,11 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun App(
     navController: NavHostController,
-    modifier: Modifier
+    modifier: Modifier = Modifier
 ) {
     NavHost(
         navController = navController,
-        startDestination = Destinations.ServiceListGraph,
+        startDestination = Destinations.SplashScreenRoute,
         modifier = modifier
     ) {
         composable<Destinations.SplashScreenRoute> {
@@ -149,7 +150,13 @@ fun App(
                     }
                 )
             }
+        }
+        composable<Destinations.ProfileScreenRoute>{
+            ProfileScreenRoot(
+                onLogOutClick = {
 
+                }
+            )
         }
     }
 }
