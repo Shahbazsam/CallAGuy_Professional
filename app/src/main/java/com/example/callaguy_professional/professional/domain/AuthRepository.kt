@@ -5,4 +5,5 @@ import com.example.callaguy_professional.core.domain.Result
 
 interface AuthRepository {
     suspend fun isApproved() : Result<Boolean , DataError.Remote>
+    suspend fun login( loginRequest: LoginRequest) : Result<LoginResponse, DataError.Remote>
 }

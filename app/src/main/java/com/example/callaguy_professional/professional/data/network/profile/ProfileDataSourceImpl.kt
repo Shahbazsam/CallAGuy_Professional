@@ -13,6 +13,7 @@ import io.ktor.client.request.forms.submitFormWithBinaryData
 import io.ktor.client.request.get
 import io.ktor.http.Headers
 import io.ktor.http.HttpHeaders
+import java.util.UUID
 
 class ProfileDataSourceImpl(
     private val httpClient: HttpClient
@@ -28,11 +29,10 @@ class ProfileDataSourceImpl(
 
             val bytes = contentResolver.openInputStream(uri)?.use {
                 it.readBytes()
-            } ?: throw IllegalArgumentException("Unable to read Image")
+            } ?: byteArrayOf()
 
-            val mimeType = contentResolver.getType(uri) ?: "application/octet-stream"
-
-            val dummyName = "image.jpg"
+            val mimeType = contentResolver.getType(uri) ?: ""
+            val fileName = UUID.randomUUID().toString()
 
 
             httpClient.submitFormWithBinaryData(
@@ -42,7 +42,7 @@ class ProfileDataSourceImpl(
                         key = "file",
                         value = bytes,
                         headers = Headers.build {
-                            append(HttpHeaders.ContentDisposition, "filename=\"$dummyName\"")
+                            append(HttpHeaders.ContentDisposition, "filename= $fileName")
                             append(HttpHeaders.ContentType, mimeType)
                         }
                     )
