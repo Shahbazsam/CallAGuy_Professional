@@ -88,4 +88,5 @@ Migration to Kotlin Multiplatform for iOS support.
 Enhanced analytics for professionals.
 
 👤 Author
+
 Mohammad Shahbaz
