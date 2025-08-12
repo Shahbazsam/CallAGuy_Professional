@@ -50,11 +50,15 @@ API Service (Ktor) / Local Storage
 
 ## 📸 Screens & Modules
 
-- **Registration Screen** – Capture details, CV, and service offerings.
+- **Splash Screen**
+- **Login Screen**
+- **Register Screen** – Provide details, CV, and select offered services.
 - **Not Approved Screen** – Displayed until admin approval.
-- **Service Request List** – Filtered by offered services and service area.
-- **Service Request Details** – View request info, accept job, complete job.
-- **Profile Screen** – Manage personal information & upload profile image.
+- **Ongoing Services Screen** – List of jobs currently in progress.
+- **Ongoing Service Detail Screen** – Full details for an in-progress job.
+- **Service List Screen** – Available jobs filtered by service type and area.
+- **Service Detail Screen** – Accept or decline a job request.
+- **Profile Screen** – Manage personal information & upload profile picture.
 
 ---
 
@@ -68,7 +72,7 @@ API Service (Ktor) / Local Storage
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/CallAGuyProfessionalApp.git
+   git clone https://github.com/Shahbazsam/CallAGuy_Professional.git
 
 2. Open the project in Android Studio.
 
