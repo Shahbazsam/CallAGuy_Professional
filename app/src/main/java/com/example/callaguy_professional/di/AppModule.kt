@@ -5,6 +5,8 @@ import android.content.SharedPreferences
 import com.example.callaguy_professional.core.auth.SharedPrefTokenProvider
 import com.example.callaguy_professional.core.auth.TokenProvider
 import com.example.callaguy_professional.core.data.HttpClientFactory
+import com.example.callaguy_professional.core.domain.validation.ValidateEmail
+import com.example.callaguy_professional.core.domain.validation.ValidatePassword
 import com.example.callaguy_professional.professional.data.network.auth.AuthUseCase
 import com.example.callaguy_professional.professional.data.network.auth.AuthUseCaseImpl
 import com.example.callaguy_professional.professional.data.network.onGoing.OnGoingDataSource
@@ -22,6 +24,7 @@ import com.example.callaguy_professional.professional.domain.OnGoingRepository
 import com.example.callaguy_professional.professional.domain.ProfileRepository
 import com.example.callaguy_professional.professional.domain.ServiceRepository
 import com.example.callaguy_professional.professional.presentation.ServiceDetail.ServiceDetailViewModel
+import com.example.callaguy_professional.professional.presentation.login.LoginViewModel
 import com.example.callaguy_professional.professional.presentation.on_going.OnGoingViewModel
 import com.example.callaguy_professional.professional.presentation.on_going_detail.OnGoingDetailViewModel
 import com.example.callaguy_professional.professional.presentation.profile.ProfileViewModel
@@ -45,6 +48,10 @@ val appModule = module {
     }
     //HttpClient
     single { HttpClientFactory.create(get()) }
+
+    //Validation
+    single { ValidateEmail() }
+    single { ValidatePassword() }
 
     // DataSource
     //singleOf(::ServiceListDataSourceImpl).bind<ServiceListDataSource>() Both are same
@@ -70,5 +77,6 @@ val appModule = module {
     viewModelOf(::OnGoingDetailViewModel)
     viewModelOf(::OnGoingSharedViewModel)
     viewModelOf(::ProfileViewModel)
+    viewModelOf(::LoginViewModel)
 
 }

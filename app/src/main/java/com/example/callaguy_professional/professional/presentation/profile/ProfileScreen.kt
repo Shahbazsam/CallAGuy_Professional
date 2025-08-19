@@ -96,9 +96,6 @@ fun ProfileScreenRoot(
                     viewModel.onAction(action)
                 },
                 onLogOutClick = onLogOutClick,
-                onLogOutAction = {
-                    viewModel.onAction(ProfileAction.OnLogOutClick)
-                }
             )
         }
     }
@@ -111,7 +108,6 @@ fun ProfileScreen(
     context: Context,
     action: (ProfileAction) -> Unit,
     onLogOutClick: () -> Unit,
-    onLogOutAction : (ProfileAction) -> Unit
 
 ) {
 
@@ -188,7 +184,7 @@ fun ProfileScreen(
             ) {
                 Button(
                     onClick = {
-                        onLogOutAction
+                        action(ProfileAction.OnLogOutClick)
                         onLogOutClick()
                     },
                     colors = ButtonDefaults.buttonColors(
@@ -203,7 +199,6 @@ fun ProfileScreen(
                         lineHeight = 24.sp,
                         style = MaterialTheme.typography.bodyMedium
                     )
-
                 }
             }
         }

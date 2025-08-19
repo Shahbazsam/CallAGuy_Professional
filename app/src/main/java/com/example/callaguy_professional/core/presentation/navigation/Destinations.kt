@@ -8,6 +8,9 @@ sealed interface Destinations {
     object SplashScreenRoute : Destinations
 
     @Serializable
+    object LoginScreenRoute : Destinations
+
+    @Serializable
     object NotYetApprovedYetRoute : Destinations
 
     @Serializable

@@ -38,7 +38,6 @@ fun LoginTextField(
     label: String,
     isPassword: Boolean = false,
 ) {
-    // State to track password visibility
     var passwordVisible by remember { mutableStateOf(false) }
 
     Column {

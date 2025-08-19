@@ -36,6 +36,7 @@ import org.koin.androidx.compose.koinViewModel
 fun SplashScreen(
     viewModel: SplashViewModel = koinViewModel(),
     onNavigateToMain : () -> Unit,
+    onNavigateToLogin : () -> Unit,
     onNavigateToNotApproved : () -> Unit
 ) {
     val size = remember { Animatable(initialValue = 75.dp , Dp.VectorConverter)  }
@@ -71,9 +72,19 @@ fun SplashScreen(
         }
     }
 
-    LaunchedEffect(timerFinished , state.isApproved) {
-        if (timerFinished && state.isApproved != null){
-            if (state.isApproved == true) onNavigateToMain() else onNavigateToNotApproved()
+    LaunchedEffect(timerFinished ,state.loggedBefore , state.isApproved) {
+        if (timerFinished){
+            when(state.loggedBefore){
+                false -> onNavigateToLogin()
+                true -> {
+                    when(state.isApproved){
+                        true -> onNavigateToMain()
+                        false -> onNavigateToNotApproved()
+                        null -> Unit
+                    }
+                }
+                null -> Unit
+            }
         }
     }
 

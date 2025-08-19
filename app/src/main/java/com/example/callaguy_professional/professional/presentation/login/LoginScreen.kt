@@ -31,7 +31,8 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun LoginScreenRoot(
     viewModel: LoginViewModel = koinViewModel(),
-    onNavigateToMain : () -> Unit
+    onNavigateToMain: () -> Unit,
+    onNavigateToNotApproved : () -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val context = LocalContext.current
@@ -45,22 +46,40 @@ fun LoginScreenRoot(
             ).show()
         }
     }
-    LaunchedEffect(state.isLoginSuccessful) {
-        if (state.isLoginSuccessful) {
-            Toast.makeText(
-                context,
-                context.getString(R.string.login_successful),
-                Toast.LENGTH_LONG
-            ).show()
-            onNavigateToMain()
+    LaunchedEffect(state.isLoginSuccessful ) {
+        if (state.isLoginSuccessful ) {
+            if (state.isApproved){
+                Toast.makeText(
+                    context,
+                    context.getString(R.string.login_successful),
+                    Toast.LENGTH_LONG
+                ).show()
+                onNavigateToMain()
+            }else {
+                Toast.makeText(
+                    context,
+                    context.getString(R.string.login_successful),
+                    Toast.LENGTH_LONG
+                ).show()
+                onNavigateToNotApproved()
+            }
         }
     }
+    LoginScreen(
+        state = state,
+        onEvent = { event ->
+            viewModel.onEvent(event)
+        }
+    )
 
 }
 
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(
+    state: LoginFormState,
+    onEvent: (LoginFormEvent) -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -88,19 +107,19 @@ fun LoginScreen() {
         )
         Spacer(Modifier.height(12.dp))
         LoginTextField(
-            value = "",
+            value = state.email,
             onValueChange = {
-
+                onEvent(LoginFormEvent.EmailChanged(it))
             },
             label = "E-mail",
             isPassword = false,
-            stateError = null
+            stateError = state.emailError
         )
         LoginTextField(
-            stateError = null,
-            value = "",
+            stateError = state.passwordError,
+            value = state.password,
             onValueChange = {
-
+                onEvent(LoginFormEvent.PasswordChanged(it))
             },
             label = "Password",
             isPassword = true,
@@ -117,15 +136,21 @@ fun LoginScreen() {
         )
         Spacer(Modifier.weight(1f))
         ButtonItem(
-            isLoading = false
+            isLoading = state.isLoading,
+            onClick = {
+                onEvent(LoginFormEvent.Submit)
+            }
         )
-        
     }
-    
 }
 
 @Preview
 @Composable
 fun Preview3(modifier: Modifier = Modifier) {
-    LoginScreen()
+    LoginScreen(
+        state = LoginFormState(),
+        onEvent = {
+            LoginFormEvent.EmailChanged(email = "")
+        }
+    )
 }

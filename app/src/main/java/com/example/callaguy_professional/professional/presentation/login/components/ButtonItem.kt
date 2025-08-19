@@ -26,9 +26,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.callaguy_professional.R
+import com.example.callaguy_professional.professional.presentation.login.LoginFormEvent
 
 @Composable
-fun ButtonItem(isLoading : Boolean) {
+fun ButtonItem(
+    isLoading : Boolean,
+    onClick : (LoginFormEvent) -> Unit
+    ) {
     Column (
         verticalArrangement = Arrangement.Bottom
 
@@ -39,7 +43,7 @@ fun ButtonItem(isLoading : Boolean) {
                 .padding(12.dp)
                 .size(width = 55.dp, height = 55.dp),
             onClick = {
-
+                onClick(LoginFormEvent.Submit)
             },
             shape = RoundedCornerShape(12.dp),
             colors = ButtonDefaults.outlinedButtonColors(Color(0xFF4A90E2))

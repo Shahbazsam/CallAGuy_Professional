@@ -9,6 +9,9 @@ import com.example.callaguy_professional.professional.data.dto.LoginResponseDto
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import io.ktor.client.request.post
+import io.ktor.client.request.setBody
+import io.ktor.http.ContentType
+import io.ktor.http.contentType
 
 class AuthUseCaseImpl(
     private val httpClient: HttpClient
@@ -25,7 +28,10 @@ class AuthUseCaseImpl(
         return safeCall<LoginResponseDto> {
             httpClient.post(
                 urlString = "${AppDefaults.PROFESSIONAL_AUTH}/login"
-            )
+            ){
+                contentType(ContentType.Application.Json)
+                setBody(loginRequestDto)
+            }
         }
     }
 }

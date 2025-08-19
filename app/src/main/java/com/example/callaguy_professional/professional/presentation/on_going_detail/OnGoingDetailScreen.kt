@@ -25,6 +25,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.callaguy_professional.R
 import com.example.callaguy_professional.core.presentation.components.ConfirmationScreen
 import com.example.callaguy_professional.core.presentation.components.LoadingScreen
+import com.example.callaguy_professional.professional.data.dto.ServiceRequestStatus
 import com.example.callaguy_professional.professional.presentation.ServiceDetail.components.ServiceDetailBasicInfo
 import com.example.callaguy_professional.professional.presentation.on_going_detail.components.OnGoingDivider
 import com.example.callaguy_professional.professional.presentation.on_going_detail.components.OnGoingItem
@@ -121,26 +122,29 @@ fun OnGoingDetailScreen(
                     )
                 }
             }
-            Button(
-                onClick = {
-                    onUpdateStatusClick(service.id)
-                },
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Primary
-                ),
-                shape = RoundedCornerShape(12.dp),
+            if (service.status != ServiceRequestStatus.COMPLETED) {
+                Button(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter),
+                    onClick = {
+                        onUpdateStatusClick(service.id)
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Primary
+                    ),
+                    shape = RoundedCornerShape(12.dp),
+                    ) {
+                    Text(
+                        text = stringResource(R.string.complete_job),
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        lineHeight = 24.sp,
+                        style = MaterialTheme.typography.bodyMedium
 
-
-            ) {
-                Text(
-                    text = stringResource(R.string.complete_job),
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    lineHeight = 24.sp,
-                    style = MaterialTheme.typography.bodyMedium
-
-                )
+                    )
+                }
             }
+
         }
     }
 

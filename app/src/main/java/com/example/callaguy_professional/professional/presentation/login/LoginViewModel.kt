@@ -8,7 +8,6 @@ import com.example.callaguy_professional.core.domain.onError
 import com.example.callaguy_professional.core.domain.onSuccess
 import com.example.callaguy_professional.core.domain.validation.ValidateEmail
 import com.example.callaguy_professional.core.domain.validation.ValidatePassword
-import com.example.callaguy_professional.core.presentation.components.toUiText
 import com.example.callaguy_professional.professional.domain.AuthRepository
 import com.example.callaguy_professional.professional.domain.LoginRequest
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,12 +22,11 @@ class LoginViewModel(
     private val tokenProvider: TokenProvider
 ) : ViewModel() {
 
-
     private val _state = MutableStateFlow(LoginFormState())
     val state = _state.asStateFlow()
 
-    fun onEvent(event : LoginFormEvent){
-        when(event){
+    fun onEvent(event: LoginFormEvent) {
+        when (event) {
             is LoginFormEvent.EmailChanged -> {
                 _state.update {
                     it.copy(
@@ -36,6 +34,7 @@ class LoginViewModel(
                     )
                 }
             }
+
             is LoginFormEvent.PasswordChanged -> {
                 _state.update {
                     it.copy(
@@ -43,7 +42,8 @@ class LoginViewModel(
                     )
                 }
             }
-            LoginFormEvent.Submit -> TODO()
+
+            LoginFormEvent.Submit -> submit()
         }
     }
 
@@ -52,10 +52,10 @@ class LoginViewModel(
         val passwordResult = validatePassword.execute(state.value.password)
 
         val hasError = listOf(
-            emailResult , passwordResult
+            emailResult, passwordResult
         ).any { !it.successful }
 
-        if (hasError){
+        if (hasError) {
             _state.update {
                 it.copy(
                     emailError = emailResult.errorMessage,
@@ -64,7 +64,7 @@ class LoginViewModel(
             }
             return
         }
-        if (!hasError){
+        if (!hasError) {
             viewModelScope.launch {
                 _state.update {
                     it.copy(isLoading = true)
@@ -78,12 +78,26 @@ class LoginViewModel(
                     )
                     .onSuccess { result ->
                         tokenProvider.saveToken(result.token)
-                        _state.update {
-                            it.copy(
-                                isLoading = false,
-                                isLoginSuccessful = true
-                            )
-                        }
+                        authRepository
+                            .isApproved()
+                            .onSuccess { response ->
+                                _state.update {
+                                    it.copy(
+                                        isLoading = false,
+                                        isLoginSuccessful = true,
+                                        isApproved = response
+                                    )
+                                }
+                            }
+                            .onError { error ->
+                                _state.update {
+                                    it.copy(
+                                        isLoading = false,
+                                        isLoginError = error.toString()
+                                    )
+                                }
+                            }
+
                     }
                     .onError { error ->
                         _state.update {
@@ -97,6 +111,4 @@ class LoginViewModel(
             }
         }
     }
-
-
 }

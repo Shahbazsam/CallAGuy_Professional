@@ -4,7 +4,6 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -33,8 +32,8 @@ import com.example.callaguy_professional.core.presentation.AppDefaults
 fun SmartImageLoader(
     modifier: Modifier = Modifier,
     imageUrl: Any?,
-    shape : Shape = RoundedCornerShape(12.dp),
-    contentDescription : String? = null,
+    shape: Shape = RoundedCornerShape(12.dp),
+    contentDescription: String? = null,
 ) {
     Box(
         modifier = modifier,
@@ -69,6 +68,7 @@ fun SmartImageLoader(
             null -> {
                 CircularProgressIndicator(Modifier.size(50.dp))
             }
+
             else -> {
                 val imagePainter =
                     if (result.isSuccess) painter else painterResource(AppDefaults.imageErrorRes)

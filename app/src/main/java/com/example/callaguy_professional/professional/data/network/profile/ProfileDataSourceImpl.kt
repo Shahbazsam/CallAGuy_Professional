@@ -2,6 +2,7 @@ package com.example.callaguy_professional.professional.data.network.profile
 
 import android.content.Context
 import android.net.Uri
+import android.webkit.MimeTypeMap
 import com.example.callaguy_professional.core.data.safeCall
 import com.example.callaguy_professional.core.domain.DataError
 import com.example.callaguy_professional.core.domain.Result
@@ -31,18 +32,20 @@ class ProfileDataSourceImpl(
                 it.readBytes()
             } ?: byteArrayOf()
 
-            val mimeType = contentResolver.getType(uri) ?: ""
-            val fileName = UUID.randomUUID().toString()
+            val mimeType = contentResolver.getType(uri) ?: "image/jpeg"
+
+            val extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType) ?: "jpg"
+            val fileName = "${UUID.randomUUID()}.$extension"
 
 
             httpClient.submitFormWithBinaryData(
                 url = AppDefaults.PROFESSIONAL_PROFILE_PICTURE,
                 formData = formData {
                     append(
-                        key = "file",
+                        key = "image",
                         value = bytes,
                         headers = Headers.build {
-                            append(HttpHeaders.ContentDisposition, "filename= $fileName")
+                            append(HttpHeaders.ContentDisposition, "form-data; name=\"image\"; filename=\"$fileName.jpg\"")
                             append(HttpHeaders.ContentType, mimeType)
                         }
                     )

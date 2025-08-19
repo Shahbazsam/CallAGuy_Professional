@@ -98,4 +98,23 @@ dependencies {
     // Type Safe Navigation
     implementation("androidx.navigation:navigation-compose:2.8.9")
 
+    testImplementation("io.ktor:ktor-client-mock:${ktorVersion}")
+    testImplementation("io.ktor:ktor-client-content-negotiation:${ktorVersion}")
+    testImplementation("io.ktor:ktor-serialization-kotlinx-json:${ktorVersion}")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
+
+
+    // JUnit
+    testImplementation("junit:junit:4.13.2")
+
+    // Coroutines test
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2")
+
+    // Mocking
+    testImplementation("io.mockk:mockk:1.14.5")
+
+    // Turbine for StateFlow testing
+    testImplementation("app.cash.turbine:turbine:1.2.1")
+    testImplementation(kotlin("test"))
+
 }

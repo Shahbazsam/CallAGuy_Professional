@@ -22,33 +22,41 @@ class SplashViewModel(
     private val _state = MutableStateFlow(SplashState())
     val state = _state.asStateFlow()
 
-    fun onAction(action : SplashAction) {
-        when(action) {
+    fun onAction(action: SplashAction) {
+        when (action) {
             SplashAction.CheckApproval -> checkApproval()
         }
     }
 
     private fun checkApproval() {
         viewModelScope.launch {
-            tokenProvider.saveToken(token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwOi8vMC4wLjAuMDo4MDgxIiwiYXVkIjoidXNlcnMiLCJ1c2VySWQiOjEsInJvbGUiOiJwcm9mZXNzaW9uYWwiLCJleHAiOjE3ODUwODA1MjV9.dF4pp9mjxZSXrmAOyzWlWNrntdERsXVeuQ_Ea1lqRas")
             delay(1000L)
-            repository
-                .isApproved()
-                .onSuccess { result ->
-                    _state.update {
-                        it.copy(
-                            isApproved = result
-                        )
-                    }
+            if (tokenProvider.getToken() == null) {
+                _state.update {
+                    it.copy(
+                        loggedBefore = false
+                    )
                 }
-                .onError { error ->
-                    _state.update {
-                        it.copy(
-                            isApproved = false,
-                            errorMessage = error.toString()
-                        )
+            } else {
+                repository
+                    .isApproved()
+                    .onSuccess { result ->
+                        _state.update {
+                            it.copy(
+                                isApproved = result,
+                                loggedBefore = true
+                            )
+                        }
                     }
-                }
+                    .onError { error ->
+                        _state.update {
+                            it.copy(
+                                isApproved = false,
+                                errorMessage = error.toString()
+                            )
+                        }
+                    }
+            }
         }
     }
 }
